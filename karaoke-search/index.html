@@ -1,38 +1,31 @@
-<!DOCTYPE html>
-<html>
 <head>
-<!-- CHARACTER ENCODING + DOCUMENT COMPATIBILITY MODE FOR IE =========== -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<!-- =================================================================== -->
-<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-<script>
-$('document').ready(function() {
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script>
+	$('document').ready(function() {
 
-	$('#search-form').submit(function(e){
-		e.preventDefault();
-		search();
-		console.log('test');
+		$('#search-form').submit(function(e){
+			e.preventDefault();
+			search();
+			console.log('test');
+		});
+
+		function search() {
+			$.ajax({
+				url: 'prox.php?url=http://www.singsingmedia.com/search/search_ajax.php',
+				type: "POST",
+				cache: false,
+				data: {
+					'query': $('#query').val()
+				},
+				success: function(data) {
+					console.log(data);
+					$('#result').html(data.contents);
+					$('#query').val("").focus();			
+				}
+			 });
+		}
 	});
-
-	function search() {
-		$.ajax({
-			url: 'prox.php?url=http://www.singsingmedia.com/search/search_ajax.php',
-			type: "POST",
-			cache: false,
-			data: {
-				'query': $('#query').val()
-			},
-			success: function(data) {
-				console.log(data);
-				$('#result').html(data.contents);
-				$('#query').val("").focus();			
-			}
-		 });
-	}
-});
-</script>
-
+	</script>
 </head>
 
 <form id="search-form">
@@ -41,5 +34,3 @@ $('document').ready(function() {
 </form>
 
 <div id="result"></div>
-
-</html>
