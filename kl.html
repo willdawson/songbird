@@ -1,0 +1,54 @@
+<head>
+	<title>kl</title>
+</head>
+
+<body>
+	{{> main}}
+</body>
+
+<template name="main">
+
+	{{#unless currentUser}}
+		<div class="login-box" style="margin-bottom: 40px;">
+			<h1>Login</h1>
+			<form action="#" id="login-form">
+				<input type="email" id="login-email" placeholder="email"><br>
+				<input type="password" id="login-password" placeholder="password"><br>
+				<input type="submit" id="login-submit" value="Sign In">
+			</form>
+		</div>
+
+		<div class="create-account-box" style="margin-bottom: 40px;">
+			<h1>Create Account</h1>
+			<form action="#" id="create-account-form">
+				<input type="email" id="create-account-email" placeholder="email"><br>
+				<input type="password" id="create-account-password" placeholder="password"><br>
+				<input type="submit" id="create-account-submit" value="Create Account">
+			</form>
+		</div>
+
+		<a href="#" class="login-with-google">Login with Google</a><br><br>
+	{{/unless}}
+
+	{{#if currentUser}}
+		<h1>You are logged in as {{currentUserName}}<br></h1>
+		<a href="#" class="log-out">Log out</a>
+		<form action="#" id="add-item-form">
+			<input type="text" id="add-item-name"><br>
+			<input type="submit" value="Add Item" id="add-item-submit">
+		</form>
+		<h2>Your Items</h2>
+		<ul>
+			{{#each currentUserItems}}
+				<li>{{itemName}} (added on {{timeCreated}} by {{itemAuthor}})</li>
+			{{/each}}
+		</ul>
+		<h2>Everyone's Items</h2>
+		<ul>
+			{{#each items}}
+				<li>{{itemName}} (added on {{timeCreated}} by {{itemAuthor}})</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+
+</template>
