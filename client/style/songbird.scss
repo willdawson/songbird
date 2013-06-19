@@ -1,0 +1,96 @@
+// IMPORTS
+//----------------------------------------------------------//
+@import "normalize";
+@import "reset";
+//----------------------------------------------------------//
+
+
+// VARIABLES
+//----------------------------------------------------------//
+$black: #000;
+$white: #fff;
+//----------------------------------------------------------//
+
+
+// CLEARFIX
+//----------------------------------------------------------//
+@mixin clearfix{
+	&:before, &:after{
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+	&{
+		zoom: 1;
+	}
+}
+//----------------------------------------------------------//
+
+
+// GLOBALS
+//----------------------------------------------------------//
+html, body {
+	font-size: 100%;
+	color: $black;
+}
+
+html {}
+
+body {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	background: url(../../public/images/bg.jpg);
+}
+
+a {
+	color: $black;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+//----------------------------------------------------------//
+
+
+// LOGIN
+//----------------------------------------------------------//
+.login-box {
+	text-align: center;
+	padding-top: 100px;
+
+	.logo {
+		font-size: 42px;
+		text-transform: uppercase;
+		color: $white;
+		margin-bottom: 40px;
+	}
+
+	.login-with-google {
+		display: inline-block;
+		color: $white;
+		font-size: 18px;
+		background-color: rgba(255, 255, 255, .1);
+		border: 2px solid $white;
+		padding: .8em 2.2em .9em;
+		border-radius: 4px;
+		font-weight: 300;
+	}
+}
+//----------------------------------------------------------//
+
+
+// SECTION 2
+//----------------------------------------------------------//
+#results table tr:hover {
+	background-color: yellow;
+	cursor: pointer;
+}
+//----------------------------------------------------------//
+
+
+// SECTION 3
+//----------------------------------------------------------//
+
+//----------------------------------------------------------//

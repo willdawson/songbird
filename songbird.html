@@ -3,7 +3,9 @@
 </head>
 
 <body>
-	{{> main}}
+	<div class="wrapper">
+		{{> main}}
+	</div>
 </body>
 
 <template name="main">
@@ -19,7 +21,10 @@
 </template>
 
 <template name="login">
-	<a href="#" class="login-with-google">Login with Google</a><br><br>
+	<div class="login-box">
+		<h1 class="logo">Songbird</h1>
+		<a href="#" class="login-with-google">Sign in with Google</a><br><br>
+	</div>
 </template>
 
 <template name="queue">
