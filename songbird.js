@@ -91,8 +91,10 @@ if (Meteor.isServer) {
 
 	Meteor.methods({
 		searchSongs: function () {
-			this.unblock();
-			return Meteor.http.call("GET", "http://www.singsingmedia.com/search/search_ajax.php");
+			// this.unblock();
+			var url = 'http://www.singsingmedia.com/search/search_ajax.php',
+			response = Meteor.http.call('GET', url, {query: 'test'});
+			return response;
 		}
 	});
 } // end Meteor.isServer
