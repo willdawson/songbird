@@ -1,49 +1,26 @@
-var Items = new Meteor.Collection("items");
+var Songs = new Meteor.Collection('songs');
 
 if (Meteor.isClient) {
 
-	Template.main.instructions = function () {
-		return "Sign in below.";
-	};
+	if (Meteor.user()) {
+		Session.set('currentUserName', Meteor.user().profile.name);
+	}
 
-	// Template.main.currentUserEmail = function () {
-	// 	return Meteor.user().emails[0].address;
-	// }
-
-	Template.main.currentUserName = function () {
+	Template.queue.currentUserName = function () {
 		return Session.get('currentUserName');
 	}
 
-	Template.main.items = function () {
-		return Items.find({});
+	Template.queue.songs = function () {
+		return Songs.find({});
 	}
 
-	Template.main.currentUserItems = function () {
-		return Items.find({
-			itemAuthor: Session.get('currentUserName')
+	Template.queue.currentUserSongs = function () {
+		return Songs.find({
+			addedBy: Session.get('currentUserName')
 		});
 	}
 
 	Template.main.events({
-
-		// login submit
-		'submit #login-form': function (e, t) {
-			e.preventDefault();
-			var email = t.find('#login-email').value,
-			password = t.find('#login-password').value;
-			// trim and validate inputs
-			Meteor.loginWithPassword(email, password, function (error) {
-				if (error) {
-					// inform the user that their login attempt has failed.
-					console.log(error);
-				} else {
-					// the user has been logged in.
-					console.log('logged in');
-					console.log(Meteor.user());
-				}
-			});
-			return false;
-		},
 
 		// login with google
 		'click .login-with-google': function (e, t) {
@@ -59,26 +36,8 @@ if (Meteor.isClient) {
 			});
 		},
 
-		// create account submit
-		'submit #create-account-form': function (e, t) {
-			e.preventDefault();
-			var email = t.find('#create-account-email').value,
-			password = t.find('#create-account-password').value;
-			// trim and validate the input
-			Accounts.createUser({email: email, password: password}, function (error) {
-				if (error) {
-					// inform the user that account creation failed
-					console.log(error);
-				} else {
-					// success, account has been created and the user has logged in successfully.
-					console.log('account created');
-				}
-			});
-			return false;
-		},
-
 		// log out
-		'click .log-out': function (e) {
+		'click .log-out': function (e, t) {
 			e.preventDefault();
 			Meteor.logout(function (error) {
 				if (error) {
@@ -87,23 +46,53 @@ if (Meteor.isClient) {
 			});
 		},
 
-		// add item
-		'submit #add-item-form': function (e, t) {
+		// song search
+		'submit #search-form': function (e, t) {
 			e.preventDefault();
-			var itemName = t.find('#add-item-name').value;
-			Items.insert({
-				itemName: itemName,
-				timeCreated: new Date(),
-				itemAuthor: Session.get('currentUserName')
+			$(e.currentTarget).children('input[type="text"]').val('').blur();
+			Meteor.call('searchSongs', function(error, results) {
+				if (error) {
+					console.log(error)
+				} else {
+					console.log(results.content);
+					$('#results').html('').html(results.content);
+					$('#results .msg').remove();
+					$('#results table').attr({
+						'cellspacing': '',
+						'width': ''
+					});
+				}
+			});
+		},
+
+		// add song
+		'click #results table tr': function (e, t) {
+			e.preventDefault();
+			var songId = $(e.currentTarget).children('td:nth-child(1)').html(),
+			songTitle = $(e.currentTarget).children('td:nth-child(2)').html(),
+			songArtist = $(e.currentTarget).children('td:nth-child(3)').html();
+			console.log(songId);
+			Songs.insert({
+				songId: songId,
+				songTitle: songTitle,
+				songArtist: songArtist,
+				addedBy: Session.get('currentUserName')
 			});
 		}
 	});
-}
+} // end Meteor.isClient
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
 		// code to run on server at startup
-		// ONLY UNCOMMENT THE BELOW LINE TO DELETE ALL OF ITEMS COLLECTION
-		// Items.remove({});
+		// ONLY UNCOMMENT THE BELOW LINE TO DELETE ALL OF SONGS COLLECTION
+		// Songs.remove({});
 	});
-}
+
+	Meteor.methods({
+		searchSongs: function () {
+			this.unblock();
+			return Meteor.http.call("GET", "http://www.singsingmedia.com/search/search_ajax.php");
+		}
+	});
+} // end Meteor.isServer

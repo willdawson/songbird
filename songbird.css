@@ -1,1 +1,9 @@
 /* CSS declarations go here */
+body {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+#results table tr:hover {
+	background-color: yellow;
+	cursor: pointer;
+}
