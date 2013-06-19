@@ -49,13 +49,13 @@ if (Meteor.isClient) {
 		// song search
 		'submit #search-form': function (e, t) {
 			e.preventDefault();
-			$(e.currentTarget).children('input[type="text"]').val('').blur();
-			Meteor.call('searchSongs', function(error, results) {
+			var query = $(e.currentTarget).children('input#query').val();
+			Meteor.call('searchSongs', query, function(error, response) {
 				if (error) {
 					console.log(error)
 				} else {
-					console.log(results.content);
-					$('#results').html('').html(results.content);
+					console.log(response.content);
+					$('#results').html('').html(response.content);
 					$('#results .msg').remove();
 					$('#results table').attr({
 						'cellspacing': '',
@@ -63,6 +63,7 @@ if (Meteor.isClient) {
 					});
 				}
 			});
+			$(e.currentTarget).children('input[type="text"]').val('').blur();
 		},
 
 		// add song
@@ -90,11 +91,10 @@ if (Meteor.isServer) {
 	});
 
 	Meteor.methods({
-		searchSongs: function () {
+		searchSongs: function (query) {
 			this.unblock();
 			var url = 'http://www.singsingmedia.com/search/search_ajax.php',
-			query = 'something',
-			response = Meteor.http.call('POST', url, {query: 'hi'});
+			response = Meteor.http.post(url, {params: {query: query}});
 			return response;
 		}
 	});
