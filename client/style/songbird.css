@@ -381,7 +381,9 @@ html, body {
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: url(../../public/images/bg.jpg); }
+  background: url(../../images/bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  background-size: cover; }
 
 a {
   color: black;
@@ -391,7 +393,7 @@ a {
 
 .login-box {
   text-align: center;
-  padding-top: 100px; }
+  padding-top: 130px; }
   .login-box .logo {
     font-size: 42px;
     text-transform: uppercase;
@@ -401,9 +403,9 @@ a {
     display: inline-block;
     color: white;
     font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     border: 2px solid white;
-    padding: .8em 2.2em .9em;
+    padding: .85em 2.2em .9em;
     border-radius: 4px;
     font-weight: 300; }
 
