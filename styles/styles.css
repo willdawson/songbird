@@ -1,0 +1,284 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: 'ProximaNovaSoftBold';
+	src: url('ProximaNovaSoft-Bold.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ProximaNovaSoftRegular';
+	src: url('ProximaNovaSoft-Regular.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	position: relative;
+	top: 0;
+	left: 0;
+	background: url('../images/microphone2.jpg');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	font-family: 'ProximaNovaSoftRegular','HelveticaNeue', sans-serif;
+	color: white;
+
+}
+
+h1 {
+	font-size: 2.1em;
+	letter-spacing: -0.05em;
+	font-family: 'ProximaNovaSoftRegular',sans-serif;
+	animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+  -o-animation: fadein 1s; /* Opera */
+}
+
+h2 {
+	font-size: 1.1em;
+	font-weight: normal;
+	margin-top: 2px;
+	color: rgba(255,255,255,.8);
+	animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+.hidden {
+	display: none;
+}
+
+h2:hover .hidden{
+	display: inline-block;
+}
+
+p {
+	font-size: .8em;
+	color: rgba(255,255,255,.8);
+	margin-bottom: 5px;
+}
+
+form {
+	position: relative;
+	right: 0;
+	top: 70;
+	display: block;
+	float: right;
+	margin-top: 40px;
+	animation: fadein 10s;
+  -moz-animation: fadein 10s; /* Firefox */
+  -webkit-animation: fadein 10s; /* Safari and Chrome */
+  -o-animation: fadein 10s; /* Opera */
+}
+
+input {
+	position: relative;
+	margin: 10px 10px 0 0;
+	border-radius: 5px;
+	font-size: 1em;
+	border: 2px solid white;
+	background-color: rgba(0,0,0,0);
+	padding: .6em .2em .8em .8em;
+	width: 201px;
+	height: 48px;
+	color: rgba(255,255,255,1);
+}
+
+input::-webkit-input-placeholder {
+	color: rgba(255,255,255,.4);
+	font-family: 'HelveticaNeue',sans-serif;
+	
+}
+
+button {
+
+	padding: .6em 1.2em .8em 1.2em;
+	border-radius: 5px;
+	border: none;
+	font-size: 1em;
+	background-color: white;
+	font-family: 'ProximaNovaSoftRegular','HelveticaNeue', sans-serif;
+	font-weight: bold;
+	letter-spacing: -0.05em;
+	color: #40218d;
+	height: 48px;
+}
+
+button:hover {
+	background-color: rgba(255,255,255,.9);
+	box-shadow: 2px 2px 5px #333;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(1, 11, 94, .5);
+}
+
+.content {
+	position: relative;
+	top: 25%;
+	/*border: 1px solid white;*/
+	width: 612px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 10000;
+}
+
+.phone {
+	position: relative;
+	width: 248px;
+	height: 484px;
+	background: url('../images/frame2x.png');
+	background-size: cover;
+	float: left;
+	animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+  -o-animation: fadein 1s; /* Opera */
+}
+
+.copy {
+	display: block;
+	position: relative;
+	top: 74px;
+	width: 294px;
+	/*border: 1px solid white;*/
+	float: right;
+
+}
+
+.bird {
+	position: relative;
+	top: -54px;
+	left: -10px;
+	background: url('../images/bird2x.png');
+	background-size: cover;
+	width: 64px;
+	height: 60px;
+}
+
+footer {
+	display: none;
+	position: relative;
+	top:20px;
+	background: url('../images/tinybird2x.png');
+	background-size: cover;
+	width: 38px;
+	height: 44px;
+	margin-left: auto;
+	margin-right: auto;
+	/*border: 1px solid white;*/
+}
+
+/*@media only */
+
+@media only screen and (max-width: 620px) {
+	body {
+		padding-bottom: 120px;
+		background-position: right top;
+	}
+	.overlay {
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+	.content {
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.copy {
+		top: 20;
+		display: block;
+		float: none;
+		text-align: center;
+		/*padding-top: 40;*/
+		margin-left: auto;
+		margin-right: auto;
+	}
+	h1 {
+		font-size: 2.7em;
+	}
+
+	h2 {
+		font-size: 1.1em;
+	}
+
+	.phone {
+		top: 0;
+		display: block;
+		float: none;
+		margin-top: 40px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	form {
+		top: 10;
+		display: block;
+		text-align: center;
+		float: none;
+		left: 0;
+		margin: 10px 0 10px 0;
+	}
+
+	p {
+		font-size: 1.0em;
+	}
+	footer {
+		display: block;
+	}
+
+	.bird {
+		display: none;
+	}
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}​
+
+
